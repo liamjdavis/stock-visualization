@@ -1,5 +1,5 @@
-install.packages("quantmod")
-library(quantmod)
+install.packages("tidyquant")
+library(tidyquant)
 
 install.packages("ggplot2")
 library(ggplot2)
@@ -10,5 +10,9 @@ stocks = c("AAPL", "NFLX", "AMZN", "TSLA", "GOOGL")
 # visualize for past year
 currDate = Sys.Date()
 startDate = currDate %m-% years(1)
-getSymbols(stocks, from = startDate, to = currDate, auto.assign = TRUE)
+
+prices = tq_get(stocks, from = startDate, to = currDate, get = "stock.prices")
+prices %>%
+  ggplot2(aes(x = date, y = adjusted, color = symbol)) + 
+  geom_line()
 
