@@ -1,1 +1,1 @@
-# stock-visualization
+# Stock Visualizer and Forecaster
